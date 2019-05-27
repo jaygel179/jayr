@@ -15,9 +15,9 @@ export default {
       return Promise.reject(new Error('User is not logged in.'))
     }
 
-    return request.post(`${process.env.VUE_APP_SERVER_URL}/auth/verify`, { token })
+    return request.post(`/api/verify/`, { token })
       .then((res) => {
-        store.commit(LOGIN_SUCCESS, res.token)
+        store.commit(`auth/${LOGIN_SUCCESS}`, res.token)
       }).catch(() => {
         window.localStorage.removeItem('accessToken')
         throw new Error('User is not logged in.')

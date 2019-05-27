@@ -33,7 +33,7 @@ const getters = {
 const actions = {
   login({ dispatch, commit }, data) {
     commit(LOGIN)
-    return request.post(`/api/v1/login/`, data, headers())
+    return request.post(`/api/login/`, data, headers())
       .then((response) => {
         commit(LOGIN_SUCCESS, response.token)
         router.push({ path: '/' })
@@ -52,7 +52,7 @@ const actions = {
   },
   signup({ dispatch, commit }, data) {
     commit(SIGNUP)
-    return request.post(`/api/v1/signup/`, data, headers())
+    return request.post(`/api/signup/`, data, headers())
       .then((response) => {
         commit(SIGNUP_SUCCESS, response.token)
         router.push({ path: '/' })

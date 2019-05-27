@@ -6,7 +6,6 @@ import auth from './utils/auth'
 Vue.use(Router)
 
 export default new Router({
-  mode: 'history',
   routes: [
     {
       path: '/login',
@@ -29,6 +28,18 @@ export default new Router({
           next('/')
         }).catch(() => {
           next()
+        })
+      },
+    },
+    {
+      path: '/',
+      name: 'home',
+      component: () => import(/* webpackChunkName: "home" */ '@/components/Home.vue'),
+      beforeEnter: (to, from, next) => {
+        auth.verifyLogin().then(() => {
+          next()
+        }).catch(() => {
+          next('/login')
         })
       },
     },
