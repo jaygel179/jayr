@@ -1,12 +1,15 @@
 import Vue from 'vue'
 import App from '@/App.vue'
+import Vuetify from 'vuetify'
 
-import store from '@/store' 
+import store from '@/store'
 import router from '@/router'
 
-Vue.config.productionTip = false
+import 'vuetify/dist/vuetify.min.css'
 
-// Vue.use(VueRouter)
+
+Vue.use(Vuetify)
+Vue.config.productionTip = false
 
 const vue = new Vue({
   router,

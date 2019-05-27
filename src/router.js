@@ -1,21 +1,41 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import VueDemo from '@/components/VueDemo'
-import Messages from '@/components/Messages'
+
+import auth from './utils/auth'
 
 Vue.use(Router)
 
 export default new Router({
+  mode: 'history',
   routes: [
     {
-      path: '/',
-      name: 'home',
-      component: VueDemo
+      path: '/login',
+      name: 'Login',
+      component: () => import(/* webpackChunkName: "login" */ '@/components/Login.vue'),
+      beforeEnter: (to, from, next) => {
+        auth.verifyLogin().then(() => {
+          next('/')
+        }).catch(() => {
+          next()
+        })
+      },
     },
     {
-      path: '/messages',
-      name: 'messages',
-      component: Messages
-    }
-  ]
+      path: '/signup',
+      name: 'SignUp',
+      component: () => import(/* webpackChunkName: "signup" */ '@/components/Signup.vue'),
+      beforeEnter: (to, from, next) => {
+        auth.verifyLogin().then(() => {
+          next('/')
+        }).catch(() => {
+          next()
+        })
+      },
+    },
+    {
+      path: '*',
+      name: 'NotFound',
+      component: () => import(/* webpackChunkName: "notfound" */'@/components/NotFound.vue'),
+    },
+  ],
 })
