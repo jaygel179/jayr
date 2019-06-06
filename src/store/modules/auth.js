@@ -62,7 +62,7 @@ const actions = {
         dispatch(
           'notification/create',
           {
-            message: err || err.message || 'Something went wrong. Please try again.',
+            message: err && err.message || 'Something went wrong. Please try again.',
             type: 'error',
           },
           { root: true },
